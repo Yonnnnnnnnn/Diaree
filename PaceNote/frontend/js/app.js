@@ -24,8 +24,58 @@ let postInteractions = JSON.parse(localStorage.getItem('postInteractions')) || {
 
 // =============== PATCH GOAL RENDERING ===============
 
+// Render ulang preview
+function renderImagePreview() {
+  const container = document.getElementById("image-preview-container");
+  container.innerHTML = "";
+
+  uploadedImages.forEach((src, idx) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "Preview " + (idx + 1);
+
+    // Klik untuk hapus
+    img.addEventListener("click", () => {
+      uploadedImages.splice(idx, 1);
+      renderImagePreview();
+    });
+
+    container.appendChild(img);
+  });
+}
+
+// Tambah gambar (contoh input file)
+function handleImageUpload(fileInput) {
+  const files = fileInput.files;
+  for (let i = 0; i < files.length; i++) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      uploadedImages.push(e.target.result);
+      renderImagePreview();
+    };
+    reader.readAsDataURL(files[i]);
+  }
+  fileInput.value = ""; // reset
+}
+
+// === FLOATING BEHAVIOR WITH KEYBOARD ===
+if (window.visualViewport) {
+  const previewContainer = document.getElementById("image-preview-container");
+  window.visualViewport.addEventListener("resize", () => {
+    const offset = window.innerHeight - window.visualViewport.height;
+    if (offset > 100) {
+      // Keyboard muncul
+      previewContainer.style.bottom = offset + 60 + "px"; // naik di atas keyboard + FAB
+    } else {
+      // Keyboard hilang
+      previewContainer.style.bottom = "70px";
+    }
+  });
+}
+
 // Convert diary content yang punya <span class="goal-ref"> menjadi chip live
 // ✅ Fungsi baru: render goals jadi chip atau inline text
+
 function renderDiaryWithGoals(content = '', opts = {}) {
   const mode = opts.mode || 'chip'; // 'chip' untuk diarylist/detail, 'inline' untuk feed
   if (!content) return '';
@@ -2103,4 +2153,5 @@ document.addEventListener('DOMContentLoaded', function() {
       hideGoalInputBox();
     }
   });
+
 });

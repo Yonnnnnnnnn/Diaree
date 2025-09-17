@@ -1571,14 +1571,20 @@ body {
 
 /* Style untuk interaksi */
 .action-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #6c757d;
-    cursor: pointer;
-    transition: all 0.2s;
-    padding: 5px 10px;
-    border-radius: 4px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 18px; /* biar ikon pas */
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn i {
+  font-size: 18px;
 }
 
 .action-btn:hover {
@@ -1941,15 +1947,16 @@ body {
   left: 0;
   right: 0;
   display: flex;
-  gap: 8px;
-  overflow-x: auto;       /* 🔥 scroll horizontal */
+  gap: 6px;               /* sedikit lebih rapat */
+  overflow-x: auto;
   overflow-y: hidden;
   background: rgba(255,255,255,0.95);
   border-top: 1px solid #ddd;
-  padding: 8px;
+  padding: 6px;           /* lebih kecil dari 8px */
   box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
   z-index: 9999;
-  scroll-snap-type: x mandatory; /* opsional: snap tiap gambar */
+  scroll-snap-type: x mandatory;
+  height: 82px;           /* 70px + padding atas bawah (6+6) */
 }
 
 .image-preview-floating::-webkit-scrollbar {
@@ -1964,32 +1971,53 @@ body {
 .image-preview-floating .image-preview {
   position: relative;
   flex: 0 0 auto;
-  width: 100px;   /* 🔥 fix kotak */
-  height: 100px;
+  width: 70px;            /* 🔥 dari 100 jadi 70 */
+  height: 70px;           /* 🔥 dari 100 jadi 70 */
   scroll-snap-align: start;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
   background: #f0f0f0;
 }
 
 .image-preview-floating .image-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;  /* 🔥 isi penuh kotak tanpa lonjong */
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   display: block;
 }
 
 .image-preview-floating .remove-image {
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: -4px;
+  right: -4px;
   background: rgba(0,0,0,0.7);
   color: white;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 18px;     /* lebih kecil */
+  height: 18px;
   text-align: center;
-  line-height: 18px;
-  font-size: 14px;
+  line-height: 16px;
+  font-size: 12px;
   cursor: pointer;
 }
+
+/* tombol toggle preview */
+.fab.small {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  line-height: 40px;
+  margin-left: 6px;
+  background: #666;       /* beda warna biar kelihatan */
+  border-radius: 50%;
+  color: white;
+}
+
+.fab.small:hover {
+  background: #444;
+}
+
+.hidden {
+  display: none !important;
+}
+

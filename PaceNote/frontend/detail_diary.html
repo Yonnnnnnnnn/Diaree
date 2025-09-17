@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaceNote - Detail Diary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 60px;
+        }
+        
+        .detail-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            z-index: 100;
+        }
+        
+        .back-btn {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #FF9800;
+            cursor: pointer;
+        }
+        
+        .detail-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .detail-container {
+            padding: 15px;
+        }
+        
+        .diary-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .diary-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FF9800;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .diary-author {
+            font-weight: 600;
+        }
+        
+        .diary-date {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .diary-content {
+            padding: 0 15px 15px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        
+        .diary-media {
+            margin-top: 15px;
+        }
+        
+        .media-single img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+        
+        .media-grid img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+            height: 150px;
+        }
+        
+        .diary-interactions {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #6c757d;
+            cursor: pointer;
+        }
+        
+        .action-btn.active {
+            color: #FF5722;
+        }
+        
+        .comments-section {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .comments-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .comment {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .comment-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .comment-content {
+            flex-grow: 1;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .comment-text {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .comment-date {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .add-comment {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        
+        .comment-input {
+            flex-grow: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        .send-comment {
+            background: #FF9800;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .no-comments {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 10px;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background: #fff;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #555;
+            text-decoration: none;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+        
+        .nav-item.active {
+            color: #FF9800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="detail-header">
+        <div class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <h1 class="detail-title">Detail Diary</h1>
+    </header>
+    
+    <!-- Konten Detail -->
+    <main class="detail-container">
+        <div class="diary-card">
+            <div class="diary-header">
+                <div class="avatar" id="author-avatar">U</div>
+                <div>
+                    <div class="diary-author" id="author-name">You</div>
+                    <div class="diary-date" id="diary-date">Sep 11, 2023</div>
+                </div>
+            </div>
+            
+            <div class="diary-content" id="diary-content">
+                Konten diary akan dimuat di sini...
+            </div>
+            
+            <div class="diary-media" id="diary-media">
+                <!-- Media akan dimuat di sini -->
+            </div>
+            
+            <!-- Interaksi (Like, Comment, Bookmark) -->
+            <div class="diary-interactions">
+                <div class="action-btn" id="like-btn-detail">
+                    <i class="far fa-heart"></i> 
+                    <span id="like-count-detail">0</span>
+                </div>
+                <div class="action-btn" id="comment-btn-detail">
+                    <i class="far fa-comment"></i> 
+                    <span id="comment-count-detail">0</span>
+                </div>
+                <div class="action-btn" id="bookmark-btn-detail">
+                    <i class="far fa-bookmark"></i> 
+                    <span id="bookmark-count-detail">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bagian komentar -->
+        <div class="comments-section">
+            <h3 class="comments-title">Comments</h3>
+            <div id="comments-container">
+                <!-- Komentar akan dimuat di sini -->
+            </div>
+            
+            <div class="add-comment">
+                <input type="text" id="comment-input" class="comment-input" placeholder="Add a comment...">
+                <button class="send-comment" onclick="submitComment()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="diarylist.html" class="nav-item">
+            <i class="fas fa-book"></i>
+            <span>Diaries</span>
+        </a>
+        <a href="home_feed.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Feed</span>
+        </a>
+        <a href="agenda.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>Goals</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- ...existing HTML... -->
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDiaryDetail();
+            // Focus to comment input if focus=comment in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('focus') === 'comment') {
+                setTimeout(() => {
+                    focusCommentInput();
+                }, 500);
+            }
+            // Handle Enter key for comment input
+            document.getElementById('comment-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    submitComment();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

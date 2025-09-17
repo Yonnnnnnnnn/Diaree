@@ -1,0 +1,1938 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #FF9800;
+  --secondary: #F57C00;
+  --accent: #FF5722;
+  --light: #FFF3E0;
+  --dark: #212529;
+  --success: #4CAF50;
+  --warning: #FFC107;
+  --gray: #6c757d;
+  --light-gray: #FFE0B2;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  max-width: 480px;
+  margin: auto;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* Header */
+.app-header {
+  background: var(--primary);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.header-actions i {
+  cursor: pointer;
+  color: white;
+}
+
+/* Writing mode */
+.writing-mode .bottom-nav {
+  display: none; /* Hanya sembunyikan bottom nav, biarkan header timer tetap ada */
+}
+
+.writing-mode {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+
+
+
+
+
+
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 0.8;
+  }
+  51%, 100% {
+    opacity: 0.2;
+  }
+}
+
+
+.writing-header {
+  height: 50px; /* Fixed height untuk header */
+  flex-shrink: 0;
+}
+
+.timer {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+
+/* Buat animasi khusus untuk KURSOR saja */
+@keyframes smooth-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+
+/* ==== PATCH UNTUK pace-content ==== */
+#pace-content {
+  width: 100%;
+  min-height: 300px;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  border: none;
+  outline: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  margin-bottom: 20px;   /* 🔥 kasih jarak ke bawah */
+}
+
+/* Placeholder style */
+#pace-content:empty:before {
+  content: attr(placeholder);
+  color: #aaa;
+}
+
+/* Animasi untuk kursor (hanya bekerja di beberapa browser) */
+@supports (caret-color: #FF9800) {
+  #pace-content {
+    caret-color: #FF9800;
+  }
+}
+
+/* Alternative: Gunakan JavaScript untuk animasi kursor jika CSS tidak cukup */
+
+
+
+
+
+.swipe-arrow {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
+
+/* Save wizard */
+.save-wizard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.wizard-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.wizard-content h2 {
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.cover-upload {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.upload-prompt {
+  border: 2px dashed var(--light-gray);
+  padding: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cover-preview {
+  position: relative;
+  margin-top: 10px;
+}
+
+.cover-preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.remove-cover {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.share-option {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+}
+
+.share-option input {
+  margin-right: 10px;
+}
+
+.wizard-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wizard-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #e0e0e0;
+}
+
+.save-btn {
+  background: var(--primary);
+  color: white;
+}
+
+/* Login Page */
+.login-container {
+  padding: 30px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.login-container h1 {
+  margin-bottom: 10px;
+  color: var(--primary);
+  font-size: 2.5rem;
+}
+
+.tagline {
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.login-container input {
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.login-container button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-container button:hover {
+  background: var(--secondary);
+}
+
+.note {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.note a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Feed */
+.feed {
+  padding: 10px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.avatar.large {
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.text-image {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--gray);
+}
+
+.writing-stats {
+  font-size: 12px;
+  color: var(--primary);
+  font-style: italic;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--gray);
+  cursor: pointer;
+}
+
+.action-btn.active {
+  color: var(--accent);
+}
+
+/* Forms (Diary, Agenda) */
+.form-container {
+  padding: 15px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container input, 
+.form-container textarea, 
+.form-container button {
+  margin: 6px 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.form-container button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.form-container button:hover {
+  background: var(--secondary);
+}
+
+.agenda-list {
+  list-style-type: none;
+  margin-top: 15px;
+}
+
+.agenda-item {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.agenda-item-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.agenda-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.agenda-date {
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.completed {
+  text-decoration: line-through;
+  color: var(--gray);
+}
+
+.goal-proof {
+  margin-top: 10px;
+  padding: 10px;
+  background: var(--light-gray);
+  border-radius: 8px;
+  display: none;
+}
+
+.goal-proof.active {
+  display: block;
+}
+
+/* Profile Page */
+.profile-container {
+  padding: 20px;
+}
+
+.username {
+  color: var(--gray);
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.stat {
+  padding: 10px;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  color: var(--gray);
+}
+
+.section-title {
+  margin-bottom: 10px;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.achievement-icon {
+  background: var(--success);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Notifications */
+.notification-badge {
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.bullet-point {
+  color: var(--primary); /* Warna orange yang sama dengan tema */
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #555;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-item i {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.nav-item.active {
+  color: var(--primary);
+}
+
+/* Responsive tweak */
+@media (min-width: 600px) {
+  body {
+    max-width: 480px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    min-height: 100vh;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Custom file upload button */
+.file-upload {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* Tombol upload */
+.file-upload-btn {
+  background: var(--light-gray);
+  color: var(--dark);
+  padding: 8px 12px;     /* lebih kecil biar nggak mendominasi */
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Friend notification */
+.friend-notification {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.notification-icon {
+  background: var(--success);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reminder banner */
+.reminder-banner {
+  background: #FFF3E0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.reminder-banner h3 {
+  margin-bottom: 5px;
+}
+
+/* Priority flags */
+.high-priority {
+  color: #ff6b6b;
+}
+
+.medium-priority {
+  color: #feca57;
+}
+
+.low-priority {
+  color: #48dbfb;
+}
+
+/* Success button */
+.success-btn {
+  background: var(--success) !important;
+}
+
+/* Preview area for media */
+.media-preview {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.media-preview-item {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.media-preview-item img,
+.media-preview-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-media {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Feeling selector */
+.feeling-selector {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.feeling-option {
+  padding: 8px 12px;
+  background: var(--light-gray);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.feeling-option.selected {
+  background: var(--primary);
+  color: white;
+}
+
+/* Minimalist Profile Styles */
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px;
+  gap: 30px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--dark);
+}
+
+.stat-label {
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.profile-info {
+  padding: 0 15px 20px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.profile-name {
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.profile-bio {
+  color: var(--dark);
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.profile-note {
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.profile-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+/* Swipe feedback styles */
+.agenda-item.swipe-right {
+  background: rgba(76, 201, 240, 0.3) !important;
+}
+
+.agenda-item.swipe-left {
+  background: rgba(255, 87, 34, 0.3) !important;
+}
+
+/* Agenda detection notification */
+.agenda-detection-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+  text-align: center;
+}
+
+.agenda-detection-notification button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray);
+  border-bottom: 1px solid transparent;
+}
+
+.tab.active {
+  color: var(--dark);
+  border-bottom: 2px solid var(--dark);
+}
+
+.tab i {
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.posts-grid, .tagged-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 0;
+}
+
+.post-item {
+  aspect-ratio: 1/1;
+  background-color: #fafafa;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-item .text-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 360px) {
+  .profile-header {
+    gap: 20px;
+  }
+  
+  .stat-number {
+    font-size: 1.3rem;
+  }
+}
+
+
+/* Sticky image upload di bawah layar */
+@media (max-width: 768px) {
+  .image-upload-area {
+    position: fixed;
+    bottom: 70px; /* pas di atas bottom-nav */
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #eee;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    z-index: 101; /* di atas konten, tapi di bawah header */
+  }
+
+  /* Supaya teks tidak ketiban upload area */
+  #pace-content {
+    padding-bottom: 80px; 
+  }
+}
+
+
+
+
+
+
+
+/* Pastikan writing container memiliki posisi relative */
+.writing-container {
+  position: relative;
+  flex-grow: 1;
+  height: calc(100vh - 50px); /* tinggi penuh sisa layar */
+  overflow: hidden; /* ⛔ matikan scroll container */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style untuk kursor kustom - lebih tebal, tidak berkedip, sesuai ukuran teks */
+.monkeytype-cursor {
+  position: absolute;
+  width: 3px;
+  background-color: #FF9800;
+  opacity: 1;
+  transition: all 0.1s ease-out;
+  z-index: 1000;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+
+
+/* Hapus animasi blink karena kita tidak ingin kursor berkedip */
+.monkeytype-cursor {
+  animation: none; /* Nonaktifkan animasi */
+} 
+
+
+/* Toast Notification */
+.toast-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Style for goal deletion highlight */
+.goal-to-delete {
+  background-color: rgba(255, 87, 34, 0.2);
+  border-radius: 3px;
+}
+
+/* Cursor style for goal lines */
+.goal-line {
+  cursor: pointer;
+}
+
+/* Tombol Save */
+.save-button {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 99;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.save-button:hover {
+  transform: scale(1.1);
+  background-color: var(--secondary);
+}
+
+.save-button i {
+  font-size: 24px;
+}
+
+/* Animasi untuk tombol save */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Sembunyikan swipe indicator */
+.swipe-indicator {
+  display: none !important;
+}
+
+/* Diary List Styles */
+.diary-filters {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: white;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.filter-btn {
+  padding: 8px 15px;
+  border: 1px solid var(--light-gray);
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.diary-list {
+  padding: 15px;
+}
+
+.diary-item {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.diary-header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.diary-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.diary-status {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: var(--light-gray);
+}
+
+.diary-status.public {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+.diary-status.private {
+  background: #FFEBEE;
+  color: #D32F2F;
+}
+
+.diary-status.draft {
+  background: #FFF8E1;
+  color: #FFA000;
+}
+
+.diary-preview {
+  padding: 15px;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.diary-footer {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--light-gray);
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.diary-item:hover .diary-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.diary-actions {
+  opacity: 0.7;
+  visibility: visible;
+  transition: opacity 0.2s;
+}
+
+.diary-action-btn {
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.delete-btn {
+  background: #F5F5F5;
+  color: var(--gray);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--gray);
+}
+
+.empty-state i {
+  font-size: 48px;
+  margin-bottom: 15px;
+  color: var(--light-gray);
+}
+
+.add-diary-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 99;
+  cursor: pointer;
+}
+
+.add-diary-btn i {
+  font-size: 24px;
+}
+
+/* Image upload area */
+.image-upload-area {
+  padding: 8px 12px;     /* lebih kecil biar hemat ruang */
+  border-top: 1px solid #eee;
+  margin-top: 5px;       /* lebih rapat */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.file-upload-btn {
+  background: var(--light-gray);
+  color: var(--dark);
+  padding: 8px 15px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.file-upload-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.image-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image-preview {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-image {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff5252;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Image wrapper untuk editor */
+.image-wrapper {
+  display: inline-block;
+  position: relative;
+  margin: 5px;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.image-wrapper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+
+
+.inserted-image {
+  max-width: 40%;     /* supaya tidak terlalu besar */
+  height: auto;
+  margin: 8px;        /* ada jarak antara teks dan gambar */
+  float: left;        /* teks akan mengalir di kanan gambar */
+  cursor: pointer;
+  border-radius: 6px; /* opsional, biar smooth */
+}
+
+.inline-image-block {
+  display: block;
+  margin: 8px 0;
+  position: relative;
+}
+
+.inline-image-block img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
+
+
+
+.image-block img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.image-block.selected-image {
+  outline: 2px solid #4CAF50;
+}
+
+.resizable-image {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* ==== PATCH UNTUK resizer ==== */
+
+/* Resizer umum (untuk editor atau elemen teks) */
+.resizer {
+  width: 10px;
+  height: 10px;
+  background: #4CAF50; /* hijau default */
+  border-radius: 50%;
+  position: absolute;
+}
+
+/* Resizer untuk gambar */
+.image-resizer {
+  width: 12px;
+  height: 12px;
+  background: #2196F3; /* biru khusus image */
+  border-radius: 50%;
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  cursor: se-resize;
+}
+
+/* Border hijau hanya untuk gambar saat selected */
+.selected-image img {
+  outline: 2px solid #4CAF50;
+  outline-offset: 0;
+}
+
+.image-block {
+  display: block;
+  width: fit-content;
+}
+
+/* Feed media */
+.media-single img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.media-grid img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Profile grid */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.post-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.post-item img,
+.post-item .text-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Feed diary text preview */
+.note-text {
+  white-space: pre-wrap;       /* tetap hormati line break */
+  line-height: 1.5;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #333;
+
+  /* Batasi jumlah baris agar feed tidak terlalu panjang */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;       /* maksimal 5 baris */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ✅ Patch: pastikan warna goals di feed/preview tidak ditimpa note-text */
+.note-text .goal-inline-text.active {
+  color: #2196F3 !important;
+}
+
+.note-text .goal-inline-text.accomplished {
+  color: #4CAF50 !important;
+}
+
+.note-text .goal-inline-text.canceled {
+  color: #F44336 !important;
+  text-decoration: line-through;
+}
+
+
+.card-content img {
+  border-radius: 10px;
+  margin-top: 8px;
+  width: 100%;
+  display: block;
+}
+
+/* ✅ Pastikan footer diary konsisten */
+.diary-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;       /* biar tombol tidak turun ke bawah */
+  gap: 10px;
+}
+
+/* ✅ Pastikan tombol edit/delete selalu terlihat */
+.diary-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;          /* cegah tombol mengecil/hilang saat layar lebar */
+}
+
+.diary-action-btn {
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;     /* cegah teks tombol terpotong */
+}
+
+/* Tambahan biar di layar lebih besar (desktop) tombol tidak “ketiban” preview */
+@media (min-width: 600px) {
+  .diary-preview {
+    max-width: 70%;        /* sisakan ruang untuk tombol */
+  }
+}
+
+/* Area upload + tombol save jadi floating container */
+.floating-actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 200;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 8px;
+  width: 100vw;
+  max-width: 100vw;
+  scrollbar-width: thin;
+  /* Hapus justify-content agar tombol tidak tersebar */
+}
+
+/* Upload button tetap kecil */
+.floating-actions .file-upload-btn {
+  background: var(--light-gray);
+  color: var(--dark);
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Save button di kanan */
+.floating-actions .save-btn-floating {
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.floating-actions .action-btn {
+  min-width: 48px;
+  min-height: 48px;
+  flex: 0 0 auto;
+  margin: 0 6px;
+  font-size: 18px;
+}
+
+/* Sembunyikan scrollbar jika ingin lebih clean (opsional) */
+.floating-actions::-webkit-scrollbar {
+  display: none;
+}
+
+.floating-actions .action-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+
+/* Style untuk interaksi */
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.action-btn:hover {
+    background-color: #f8f9fa;
+}
+
+.action-btn.active {
+    color: #FF5722;
+}
+
+.action-btn.active i.fa-heart {
+    color: #e91e63;
+    font-weight: 900;
+}
+
+.action-btn.active i.fa-bookmark {
+    color: #FF9800;
+    font-weight: 900;
+}
+
+.diary-interactions {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin: 15px 0;
+}
+
+/* Style untuk komentar */
+.comments-section {
+    padding: 15px;
+}
+
+.comments-section h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.comment {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.comment-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #FF9800;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.comment-content {
+    flex-grow: 1;
+}
+
+.comment-author {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.comment-text {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.no-comments {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 20px;
+}
+
+.add-comment {
+    display: flex;
+    margin-top: 15px;
+}
+
+.add-comment input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.add-comment button {
+    background: #FF9800;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.goal-input-box {
+  position: absolute;
+  z-index: 2000;
+  background: #fff;
+  border: 1px solid #FF9800;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.goal-input-box input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  width: 180px;
+}
+.goal-input-box.hidden {
+  display: none;
+}
+
+/* Rapikan tampilan goal agar tidak double spacing */
+.goal-line {
+  margin: 0;
+  padding: 2px 0;   /* opsional, bisa disesuaikan */
+  display: block;   /* pastikan tetap baris penuh */
+}
+
+.goal-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 16px;
+  padding: 4px 8px;
+  font-size: 14px;
+  margin: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.goal-chip .goal-prefix {
+  margin-right: 4px;
+  font-weight: bold;
+}
+
+.goal-chip .goal-delete {
+  margin-left: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+}
+
+
+/* Warna status */
+.goal-chip.active {
+  background: #2196F3;
+  color: #fff;
+}
+
+.goal-chip.accomplished {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.goal-chip.canceled {
+  background: #F44336;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+.goal-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.goal-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+}
+
+.goal-menu-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  min-width: 120px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+.goal-menu-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.goal-menu-dropdown button:hover {
+  background: #f0f0f0;
+}
+
+.goal-menu-dropdown.show {
+  display: block;
+}
+
+.agenda-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.agenda-item .agenda-item-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.agenda-options-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.agenda-options-btn:hover { background: rgba(0,0,0,0.04); }
+
+.agenda-options-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: #fff;
+  min-width: 140px;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  z-index: 1200;
+  overflow: hidden;
+}
+
+.agenda-options-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.agenda-options-dropdown button:hover {
+  background: #f5f5f5;
+}
+
+.agenda-options-dropdown.show {
+  display: block;
+}
+
+/* visual styles for statuses on agenda list */
+.agenda-item.accomplished { background: rgba(76,175,80,0.06); }
+.agenda-item.canceled { background: rgba(244,67,54,0.06); text-decoration: line-through; opacity: 0.85; }
+
+/* PATCH: styling untuk tombol ⋮ dan dropdown di agenda */
+.agenda-options {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.agenda-options-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: #555;
+}
+
+.agenda-options-btn:hover {
+  color: #000;
+}
+
+.agenda-options-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-width: 140px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  z-index: 2000;
+  flex-direction: column;
+}
+
+.agenda-options-dropdown.show {
+  display: flex;
+}
+
+.agenda-options-dropdown .agenda-action {
+  background: none;
+  border: none;
+  padding: 10px 14px;
+  text-align: left;
+  width: 100%;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+}
+
+.agenda-options-dropdown .agenda-action:hover {
+  background: #f5f5f5;
+}
+
+/* Plain text goals for preview (list/feed) */
+.goal-inline-text {
+  font-weight: 600;
+  margin: 0 2px;
+}
+
+.goal-inline-text.active {
+  color: #2196F3 !important; /* biru */
+}
+
+.goal-inline-text.accomplished {
+  color: #4CAF50 !important; /* hijau */
+}
+
+.goal-inline-text.canceled {
+  color: #F44336 !important; /* merah */
+  text-decoration: line-through;
+}
+
+

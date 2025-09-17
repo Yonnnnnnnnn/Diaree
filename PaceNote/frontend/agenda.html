@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+  .agenda-item {
+    transition: transform 0.3s ease, background 0.3s ease;
+    touch-action: pan-y; /* Enable vertical scroll but prevent horizontal scroll */
+  }
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaceNote - Goals</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="app-header">
+    <h2>My Goals</h2>
+    <div class="header-actions">
+      <i class="fas fa-plus" onclick="showAddGoalForm()"></i>
+    </div>
+  </header>
+
+  <main class="form-container">
+    <div class="reminder-banner">
+      <h3><i class="fas fa-bell"></i> Daily Reminder</h3>
+      <p>You have 3 goals to complete today</p>
+    </div>
+
+    <ul class="agenda-list" id="task-list">
+      <li class="agenda-item">
+        <div class="agenda-item-content">
+          <input type="checkbox" onchange="toggleGoalCompletion(this)">
+          <div>
+            <div>Read chapter 5 of History</div>
+            <div class="agenda-date">Due: Today, 6:00 PM</div>
+          </div>
+        </div>
+        <i class="fas fa-flag high-priority"></i>
+      </li>
+      <li class="agenda-item">
+        <div class="agenda-item-content">
+          <input type="checkbox" onchange="toggleGoalCompletion(this)">
+          <div>
+            <div>Complete math problem set</div>
+            <div class="agenda-date">Due: Tomorrow, 9:00 AM</div>
+          </div>
+        </div>
+        <i class="fas fa-flag medium-priority"></i>
+      </li>
+      <li class="agenda-item">
+        <div class="agenda-item-content">
+          <input type="checkbox" onchange="toggleGoalCompletion(this)">
+          <div>
+            <div>Research for science project</div>
+            <div class="agenda-date">Due: Sep 15, 5:00 PM</div>
+          </div>
+        </div>
+        <i class="fas fa-flag low-priority"></i>
+      </li>
+    </ul>
+
+    <div class="goal-proof" id="goal-proof">
+      <h3><i class="fas fa-camera"></i> Prove completion</h3>
+      <p>Take a picture as proof of completing your goal</p>
+      
+      <div class="file-upload">
+        <div class="file-upload-btn">
+          <i class="fas fa-camera"></i> Take Picture
+        </div>
+        <input type="file" class="file-input" accept="image/*" capture="camera">
+      </div>
+      
+      <div>
+        <input type="checkbox" id="share-achievement" checked> 
+        <label for="share-achievement">Share with friends</label>
+      </div>
+      
+      <button type="button" class="success-btn" onclick="completeGoal()">
+        <i class="fas fa-trophy"></i> Complete Goal
+      </button>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="diarylist.html" class="nav-item">
+      <i class="fas fa-book"></i>
+      <span>Diaries</span>
+    </a>
+    <a href="home_feed.html" class="nav-item">
+      <i class="fas fa-home"></i>
+      <span>Feed</span>
+    </a>
+    <a href="agenda.html" class="nav-item active">
+      <i class="fas fa-tasks"></i>
+      <span>Goals</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

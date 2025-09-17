@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaceNote - Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="app-header">
+    <h2>My Profile</h2>
+    <div class="header-actions">
+      <i class="fas fa-cog"></i>
+    </div>
+  </header>
+
+  <main class="profile-container">
+    <div class="profile-header">
+      <div class="avatar large">Y</div>
+      <div class="profile-stats">
+        <div class="stat">
+          <div class="stat-number" id="posts-count">12</div>
+          <div class="stat-label">notes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="followers-count">276</div>
+          <div class="stat-label">followers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="following-count">0</div>
+          <div class="stat-label">following</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-info">
+      <h2 class="profile-name">Minimalism</h2>
+      <p class="profile-bio">Follow @minimalism and tag #minimalism to get chance to be featured</p>
+      <p class="profile-note">DM/email for business inquiries & collaborations<br>2 posts a day. We care</p>
+    </div>
+
+    <div class="profile-tabs">
+      <div class="tab active" data-tab="posts">
+        <i class="fas fa-grid"></i> NOTES
+      </div>
+      <div class="tab" data-tab="tagged">
+        <i class="fas fa-tag"></i> TAGGED
+      </div>
+    </div>
+
+    <div class="posts-grid" id="posts-container">
+      <!-- Posts will be populated here -->
+    </div>
+
+    <div class="tagged-grid hidden" id="tagged-container">
+      <!-- Tagged posts will be populated here -->
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="diarylist.html" class="nav-item">
+      <i class="fas fa-book"></i>
+      <span>Diaries</span>
+    </a>
+    <a href="home_feed.html" class="nav-item">
+      <i class="fas fa-home"></i>
+      <span>Feed</span>
+    </a>
+    <a href="agenda.html" class="nav-item">
+      <i class="fas fa-tasks"></i>
+      <span>Goals</span>
+    </a>
+    <a href="profile.html" class="nav-item active">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

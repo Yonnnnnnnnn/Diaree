@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaceNote - Write</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    .editor {
+      width: 100%;
+      min-height: 300px;
+      border: none;
+      outline: none;
+      padding: 12px;
+      font-size: 16px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .editor:empty:before {
+      content: attr(placeholder);
+      color: #aaa;
+    }
+
+    /* Style untuk mode edit */
+    .edit-mode .timer {
+      color: #4CAF50;
+    }
+    
+    .edit-mode .writing-header {
+      background-color: #f5f5f5;
+    }
+    
+    /* Style untuk indikator mode edit */
+    .edit-indicator {
+      font-size: 12px;
+      background: #4CAF50;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body class="writing-mode">
+
+  <!-- Timer and minimal header during writing -->
+  <header class="writing-header">
+    <div class="timer" id="timer">01:00</div>
+    <div class="writing-actions">
+      <span id="edit-indicator" class="edit-indicator" style="display: none;">Edit Mode</span>
+      <i class="fas fa-times" onclick="exitWriting()"></i>
+    </div>
+  </header>
+
+  <main class="writing-container">
+    <div id="pace-content" contenteditable="true" class="editor" placeholder="Start writing..."></div>
+      <input type="file" id="media-input" accept="image/*" multiple style="display:none">
+      <div id="media-preview" class="media-preview"></div>
+    <!-- Area upload gambar terpisah -->
+
+  </main>
+
+
+  <!-- Save Wizard (initially hidden) -->
+  <div class="save-wizard hidden" id="save-wizard">
+    <div class="wizard-content">
+      <h2>Save Your PaceNote</h2>
+      <div class="form-group">
+        <input type="text" id="pace-title" placeholder="Title">
+      </div>
+
+      <div class="share-option">
+        <input type="checkbox" id="share-pace" checked>
+        <label for="share-pace">Share with friends</label>
+      </div>
+
+      <div class="wizard-actions">
+        <button type="button" class="cancel-btn" onclick="cancelSave()">Cancel</button>
+        <button type="button" class="save-btn" onclick="savePaceNote()">Save</button>
+      </div>
+    </div>
+  </div>
+
+    <!-- Floating actions -->
+    <div id="floating-actions" class="floating-actions">
+      <!-- Formatting buttons -->
+      <button id="bold-btn" class="action-btn"><b>B</b></button>
+      <button id="italic-btn" class="action-btn"><i>I</i></button>
+      <button id="underline-btn" class="action-btn"><u>U</u></button>
+      <button id="add-goal-btn" class="action-btn" title="Add Goal"><i class="fas fa-plus"></i></button>
+      <!-- Media & save -->
+      <button id="media-btn" class="action-btn"><i class="fas fa-image"></i></button>
+      <button id="save-button" class="action-btn"><i class="fas fa-save"></i></button>
+    </div>
+    
+    <div id="goal-input-box" class="goal-input-box hidden">
+      <input type="text" id="goal-input" placeholder="Type your goal and press Enter">
+    </div>
+  
+
+
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toast-notification">
+    <span>Goals added!</span>
+  </div>
+
+  <!-- Regular bottom nav (hidden during writing) -->
+  <nav class="bottom-nav">
+    <a href="diary.html" class="nav-item active">
+      <i class="fas fa-pen"></i>
+      <span>Write</span>
+    </a>
+    <a href="diarylist.html" class="nav-item">
+      <i class="fas fa-book"></i>
+      <span>Diaries</span>
+    </a>
+    <a href="home_feed.html" class="nav-item">
+      <i class="fas fa-home"></i>
+      <span>Feed</span>
+    </a>
+    <a href="agenda.html" class="nav-item">
+      <i class="fas fa-tasks"></i>
+      <span>Goals</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Script utama -->
+  <script src="js/app.js"></script>
+
+
+</body>
+</html>

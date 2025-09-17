@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaceNote - My Diaries</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="app-header">
+    <h2>My Diaries</h2>
+    <div class="header-actions">
+      <i class="fas fa-search"></i>
+    </div>
+  </header>
+
+  <div class="diary-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="public">Public</button>
+    <button class="filter-btn" data-filter="private">Private</button>
+  </div>
+
+  <main class="diary-list" id="diary-list">
+    <!-- Diary items will be populated here -->
+  </main>
+
+  <div class="add-diary-btn" onclick="location.href='diary.html'">
+    <i class="fas fa-plus"></i>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="diarylist.html" class="nav-item active">
+      <i class="fas fa-book"></i>
+      <span>Diaries</span>
+    </a>
+    <a href="home_feed.html" class="nav-item">
+      <i class="fas fa-home"></i>
+      <span>Feed</span>
+    </a>
+    <a href="agenda.html" class="nav-item">
+      <i class="fas fa-tasks"></i>
+      <span>Goals</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

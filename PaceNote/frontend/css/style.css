@@ -1937,28 +1937,46 @@ body {
 
 .image-preview-floating {
   position: fixed;
-  bottom: 80px; /* pas di atas FAB atau bottom-nav */
+  bottom: 80px; /* tepat di atas FAB */
   left: 0;
   right: 0;
   display: flex;
-  justify-content: center;
   gap: 8px;
+  overflow-x: auto;       /* 🔥 scroll horizontal */
+  overflow-y: hidden;
   background: rgba(255,255,255,0.95);
   border-top: 1px solid #ddd;
   padding: 8px;
   box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
   z-index: 9999;
+  scroll-snap-type: x mandatory; /* opsional: snap tiap gambar */
+}
+
+.image-preview-floating::-webkit-scrollbar {
+  height: 6px;
+}
+
+.image-preview-floating::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
 }
 
 .image-preview-floating .image-preview {
   position: relative;
+  flex: 0 0 auto;
+  width: 100px;   /* 🔥 fix kotak */
+  height: 100px;
+  scroll-snap-align: start;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
 }
 
-.image-preview-floating img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
+.image-preview-floating .image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* 🔥 isi penuh kotak tanpa lonjong */
+  display: block;
 }
 
 .image-preview-floating .remove-image {
@@ -1975,8 +1993,3 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
-
-
-
-
-

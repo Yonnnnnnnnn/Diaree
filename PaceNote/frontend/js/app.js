@@ -461,7 +461,7 @@ window.addComment = addComment;
 function setupMediaUpload() {
   const mediaBtn = document.getElementById('media-btn');
   const mediaInput = document.getElementById('media-input');
-  const previewContainer = document.getElementById('media-preview');
+  const previewContainer = document.getElementById('image-preview-container'); // 🔥 ganti targetnya
 
   if (!mediaBtn || !mediaInput || !previewContainer) return;
 
@@ -481,11 +481,13 @@ function setupMediaUpload() {
           <div class="remove-image" onclick="removeImage(this)">×</div>
         `;
         previewContainer.appendChild(preview);
+        previewContainer.style.display = "flex"; // pastikan tampil
       });
     });
     this.value = ""; // reset supaya bisa upload file sama lagi
   });
 }
+
 
 // Utility untuk compress/resize gambar sebelum disimpan
 function resizeImage(file, maxWidth, maxHeight, callback) {
@@ -2155,4 +2157,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 });
+
 
